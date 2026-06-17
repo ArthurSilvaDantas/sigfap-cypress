@@ -1,0 +1,10 @@
+{
+  "proponente": {
+    "email": "joao.neves@sig.com",
+    "senha": "@Dev12345"
+  },
+  "gestor": {
+    "email": "admin@sig.com",
+    "senha": "dev123"
+  }
+}
