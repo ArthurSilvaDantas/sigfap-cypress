@@ -1,0 +1,6 @@
+[
+  { "senha": "abc12!A", "descricao": "7 chars (min-1)" },
+  { "senha": "abcdefgh1", "descricao": "sem maiúscula e sem especial" },
+  { "senha": "ABCDEFGH1", "descricao": "sem minúscula e sem especial" },
+  { "senha": "Abcdefgh!", "descricao": "sem número" }
+]
