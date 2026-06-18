@@ -3,18 +3,15 @@ import { toCyString } from "../../helpers/kebab.helper";
 let dados: any;
 
 before(() => {
-    cy.fixture("ts05-final/perfil-proposta").then((fixture) => {
+    cy.fixture("ts05-pos/perfil-proposta").then((fixture) => {
         dados = fixture;
     });
 });
 
-describe("F-15 - Proposta Finalização", () => {
+describe("F-17 — Bloqueio pós-submissão", () => {
 
-    context("Termo de aceite habilita submissão", () => {
-
-    it("CT-SIG-PROP-036 - Termo de aceite habilita submissão", () => {
-
-          cy.typeLogin(dados.usuario.email, dados.usuario.senha);
+  beforeEach(() => {
+    cy.typeLogin(dados.usuario.email, dados.usuario.senha);
     cy.get('[data-cy="user-menu"]').should("be.visible");
 
 
@@ -196,35 +193,53 @@ describe("F-15 - Proposta Finalização", () => {
     
     cy.wait(100);
 
+    cy.get('[data-cy="next-button"]').should('be.enabled').click();
 
-        cy.get('[data-cy="next-button"]').should('be.enabled').click();
-        
-        cy.wait(100);
+    cy.wait(100);
 
-        cy.get('[data-cy="termo-de-aceite-aceito-box"]').should("not.be.checked");
-
-        cy.get('[data-cy="menu-verificar-pendencias"]').click();
-
-        cy.get('.css-1alpf6f').should("be.disabled");
-        
-        cy.get('[data-cy="menu-verificar-pendencias"]').click();
-
-        cy.get('[data-cy="finalizacao"]').click();
-
-        cy.get('[data-cy="termo-de-aceite"]').click();
-
-        cy.get('[data-cy="termo-de-aceite-aceito-box"]').click();
-
-        cy.get('[data-cy="menu-verificar-pendencias"]').click();
-
-        cy.get('.css-1alpf6f').should("be.enabled");
+    //4. Finalização
 
 
+    });
+
+
+  context("Bloqueio de edição após submissão da proposta", () => {
+
+    it("CT-SIG-BLOC-001 — Bloqueio de edição após submissão da proposta", () => {
+
+      cy.get('[data-cy="termo-de-aceite-aceito-box"]').click();
+
+      cy.get('[data-cy="menu-verificar-pendencias"]').click();
+
+      cy.get('.css-1alpf6f').should("be.enabled");
+
+      cy.get('.css-1alpf6f').click();
+
+      cy.get('[data-cy="sim-continuar-button"]').click();
+
+      cy.get('[data-cy="confirmar-button"]').click();
+
+      cy.wait(100);
       
+      cy.get('[data-cy-index="propostas-0"] > .css-7732s4 > .css-13mtqy1').click();
+
+      cy.get('.css-1y5dknt').should('contain.text', 'Visualização da Proposta');
+
+
     });
   });
 
-
-
-
 });
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

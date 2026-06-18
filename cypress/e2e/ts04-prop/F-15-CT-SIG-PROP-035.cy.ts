@@ -3,14 +3,18 @@ import { toCyString } from "../../helpers/kebab.helper";
 let dados: any;
 
 before(() => {
-    cy.fixture("ts05-final/perfil-proposta").then((fixture) => {
+    cy.fixture("ts04-prop/perfil-proposta").then((fixture) => {
         dados = fixture;
     });
 });
 
-describe("F-17 — Bloqueio pós-submissão", () => {
+describe("F-15 - Proposta Finalização", () => {
 
-  beforeEach(() => {
+    context("Visualização da proposta exibe todas as seções", () => {
+
+
+    it("CT-SIG-PROP-035 — Finalização: Visualização da proposta exibe todas as seções", () => {
+
     cy.typeLogin(dados.usuario.email, dados.usuario.senha);
     cy.get('[data-cy="user-menu"]').should("be.visible");
 
@@ -193,53 +197,25 @@ describe("F-17 — Bloqueio pós-submissão", () => {
     
     cy.wait(100);
 
-    cy.get('[data-cy="next-button"]').should('be.enabled').click();
 
-    cy.wait(100);
+      cy.get(':nth-child(3) > :nth-child(4) > .css-1bgm4ll > :nth-child(1) > .css-b7m6ts')  .should('contain.text', dados.nome);
 
-    //4. Finalização
+      cy.get(':nth-child(3) > :nth-child(4) > .css-1bgm4ll > :nth-child(2)').should('contain.text', dados.usuario.email);
 
+      cy.get(':nth-child(3) > :nth-child(4) > .css-1bgm4ll > :nth-child(3) > .css-b7m6ts').should('contain.text', dados.duracao);
 
-    });
+      cy.get(':nth-child(3) > :nth-child(3) > .css-b7m6ts').should('contain.text', dados.titulo);
 
+      cy.get(':nth-child(7) > .css-1vgoj7v > .css-mh829k').should('contain.text', dados.resposta);
 
-  context("Bloqueio de edição após submissão da proposta", () => {
+      cy.get(':nth-child(7) > :nth-child(2) > .css-1bgm4ll > :nth-child(1) > .css-b7m6ts').should('contain.text', dados.nome);
 
-    it("CT-SIG-BLOC-001 — Bloqueio de edição após submissão da proposta", () => {
+      cy.get(':nth-child(7) > :nth-child(3) > .css-1bgm4ll > :nth-child(3) > .css-b7m6ts').should('contain.text', dados["search-sexo"]);
 
-      cy.get('[data-cy="termo-de-aceite-aceito-box"]').click();
-
-      cy.get('[data-cy="menu-verificar-pendencias"]').click();
-
-      cy.get('.css-1alpf6f').should("be.enabled");
-
-      cy.get('.css-1alpf6f').click();
-
-      cy.get('[data-cy="sim-continuar-button"]').click();
-
-      cy.get('[data-cy="confirmar-button"]').click();
-
-      cy.wait(100);
+      cy.get(':nth-child(2) > .css-1xqq3nr > .css-64g0ok').should('contain.text', dados.tituloAtividade);
       
-      cy.get('[data-cy-index="propostas-0"] > .css-7732s4 > .css-13mtqy1').click();
-
-      cy.get('.css-1y5dknt').should('contain.text', 'Visualização da Proposta');
-
-
     });
   });
 
+
 });
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  

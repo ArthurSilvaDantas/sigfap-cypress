@@ -3,15 +3,18 @@ import { toCyString } from "../../helpers/kebab.helper";
 let dados: any;
 
 before(() => {
-    cy.fixture("ts05-final/perfil-proposta").then((fixture) => {
+    cy.fixture("ts04-prop/perfil-proposta").then((fixture) => {
         dados = fixture;
     });
 });
 
-describe("F-16 — Verificação e Submissão", () => {
+describe("F-15 - Proposta Finalização", () => {
 
-  beforeEach(() => {
-    cy.typeLogin(dados.usuario.email, dados.usuario.senha);
+    context("Termo de aceite habilita submissão", () => {
+
+    it("CT-SIG-PROP-036 - Termo de aceite habilita submissão", () => {
+
+          cy.typeLogin(dados.usuario.email, dados.usuario.senha);
     cy.get('[data-cy="user-menu"]').should("be.visible");
 
 
@@ -110,28 +113,17 @@ describe("F-16 — Verificação e Submissão", () => {
 
     //cy.get('[data-cy="criadoPor.endereco.numero"]').clear().type(dados.numero);
 
+    cy.get('[data-cy="next-button"]').should('be.enabled').click();
+
+    cy.wait(100);
 
     //2.3 Dados acadêmicos
 
-    cy.get('[data-cy="add-areas-de-conhecimento"]').should('be.enabled').click();
-
-    cy.get('[data-cy="search-grande-area-id"]').click();
-
-    cy.get('[data-cy="ciencias-exatas-e-da-terra"]').click();
-
-    cy.get('[data-cy="search-area-id"]').click();
-
-    cy.get('[data-cy="ciencia-da-computacao"]').click();
-
-    cy.get('[data-cy="criadoPor.areaDeConhecimento-confirmar"]').should('be.enabled').click();
-    cy.get('[data-cy="next-button"]').should('be.enabled').click();
-
-    cy.wait(100);
+    //Pode ser pulada, pois os dados são preenchidos automaticamente
 
     cy.get('[data-cy="next-button"]').should('be.enabled').click();
 
     cy.wait(100);
-
 
     //3 Apresentação
 
@@ -204,67 +196,35 @@ describe("F-16 — Verificação e Submissão", () => {
     
     cy.wait(100);
 
-    cy.get('[data-cy="next-button"]').should('be.enabled').click();
 
-    cy.wait(100);
+        cy.get('[data-cy="next-button"]').should('be.enabled').click();
+        
+        cy.wait(100);
 
-    //4. Finalização
+        cy.get('[data-cy="termo-de-aceite-aceito-box"]').should("not.be.checked");
 
-    });
+        cy.get('[data-cy="menu-verificar-pendencias"]').click();
+
+        cy.get('.css-1alpf6f').should("be.disabled");
+        
+        cy.get('[data-cy="menu-verificar-pendencias"]').click();
+
+        cy.get('[data-cy="finalizacao"]').click();
+
+        cy.get('[data-cy="termo-de-aceite"]').click();
+
+        cy.get('[data-cy="termo-de-aceite-aceito-box"]').click();
+
+        cy.get('[data-cy="menu-verificar-pendencias"]').click();
+
+        cy.get('.css-1alpf6f').should("be.enabled");
 
 
-  context("Submissão da proposta com sucesso", () => {
-
-    it("CT-SIG-PROP-037 - Submissão da proposta com sucesso", () => {
-
-      cy.get('[data-cy="termo-de-aceite-aceito-box"]').click();
-
-      cy.get('[data-cy="menu-verificar-pendencias"]').click();
-
-      cy.get('.css-1alpf6f').should("be.enabled");
-
-      cy.get('.css-1alpf6f').click();
-
-      cy.get('[data-cy="sim-continuar-button"]').click();
-
-      cy.get('[data-cy="confirmar-button"]').click();
-
-      cy.wait(100);
-
-      cy.get('[data-cy-index="propostas-0"] > .css-7732s4 > .css-13mtqy1 > :nth-child(4) > .css-9h7nwi > .css-f3bdy2 > .css-10ed830').should("contain.text", "Submetida");
-
+      
     });
   });
 
-context("Submissão bloqueada com campos obrigatórios pendentes", () => {
 
-    it("CT-SIG-PROP-038 - Submissão bloqueada com campos obrigatórios pendentes", () => {
-            
-      cy.get('[data-cy="caracterizacao"]').click();
-
-      cy.get('[data-cy="informacoes-iniciais"] > .css-jq9ysz').click();
-
-      cy.get('[data-cy="duracao"]').clear();
-
-      cy.get('[data-cy="menu-verificar-pendencias"]').click();
-
-      cy.get('.css-1alpf6f').should("be.disabled");
-
-    });
-  });
 
 
 });
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
