@@ -1,7 +1,15 @@
+interface CriarContaFixture {
+  email: string;
+  senha: string;
+}
+
 interface F13cFixture {
-  proposta: {
+  edital: {
+    id: number;
     titulo: string;
-    seletor: string;
+  };
+  proposta: {
+    id: number;
   };
   orcamento: {
     faixas: {
@@ -32,16 +40,6 @@ const SELETORES = {
   opcaoFaixaB: '[data-cy="faixa-b-r-10-000-01-r-25-000-00"]',
 } as const;
 
-const obterCredenciais = () => {
-  const email = Cypress.env("SIGFAP_EMAIL");
-  const senha = Cypress.env("SIGFAP_SENHA");
-
-  expect(email, "CYPRESS_SIGFAP_EMAIL").to.be.a("string").and.not.be.empty;
-  expect(senha, "CYPRESS_SIGFAP_SENHA").to.be.a("string").and.not.be.empty;
-
-  return { email: String(email), senha: String(senha) };
-};
-
 const escaparRegex = (valor: string) =>
   valor.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
@@ -51,22 +49,10 @@ const normalizarTexto = (valor: unknown) =>
     .trim();
 
 const removerAcentos = (valor: unknown) =>
-  normalizarTexto(valor).normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  normalizarTexto(valor).normalize("NFD").replace(/[̀-ͯ]/g, "");
 
 const abrirProposta = (dados: F13cFixture) => {
-  const seletorProposta = `[data-cy="${dados.proposta.seletor}"]`;
-
-  cy.get(seletorProposta).should(($propostas) => {
-    expect(
-      $propostas.length,
-      `proposta "${dados.proposta.titulo}" disponivel no painel`,
-    ).to.be.greaterThan(0);
-  });
-
-  // Existem propostas homonimas no ambiente. A primeira proposta visivel e
-  // suficiente porque cada teste controla e valida o estado que utiliza.
-  cy.get(seletorProposta).first().click();
-  cy.url().should("match", /\/edital\/33\/minhas-propostas\/\d+$/);
+  cy.visit(`/edital/${dados.edital.id}/minhas-propostas/${dados.proposta.id}`);
   cy.contains(/Informa..es iniciais/i).should("be.visible");
 
   cy.get('[data-cy="apresentacao"]').should("be.visible").click();
@@ -199,17 +185,19 @@ const cadastrarBolsa = (bolsa: F13cFixture["orcamento"]["bolsa"]) => {
 
 describe("F-13c - Orcamento", () => {
   let dados: F13cFixture;
+  let conta: Pick<CriarContaFixture, "email" | "senha">;
 
   before(() => {
     cy.fixture<F13cFixture>("ts04-prop/F13c-orcamento").then((fixture) => {
       dados = fixture;
     });
+    cy.fixture<CriarContaFixture>("criar-conta").then((fixture) => {
+      conta = { email: fixture.email, senha: fixture.senha };
+    });
   });
 
   beforeEach(() => {
-    const { email, senha } = obterCredenciais();
-
-    cy.typeLogin(email, senha);
+    cy.typeLogin(conta.email, conta.senha);
     cy.get('[data-cy="user-menu"]').should("be.visible");
     abrirProposta(dados);
   });
@@ -254,9 +242,11 @@ describe("F-13c - Orcamento", () => {
   });
 
   it.skip("CT-SIG-PROP-028 - cadastra item em Servicos de Terceiros", () => {
-    // DEF-A reproduzido manualmente: a subetapa exibe uma tela branca.
-    // Reativar quando a pagina voltar a renderizar e a massa da US-14 estiver
-    // confirmada no ambiente. A Issue sera criada em etapa posterior pelo grupo.
+    // DEF-A reproduzido manualmente em multiplas contas e propostas: ao clicar
+    // em "+ Adicionar" ([data-cy="add-button"]) na subetapa Servicos de Terceiros,
+    // a aplicacao exibe tela em branco sem renderizar qualquer conteudo.
+    // Gatilho identico ao DEF-B (add-button), sintoma diferente por conta/subetapa.
+    // Reativar quando DEF-A for corrigido. Ver Issue #3.
   });
 
   // CT-SIG-PROP-029 - Orcamento > Bolsa (DEF-B)

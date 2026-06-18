@@ -1,10 +1,10 @@
 {
   "edital": {
+    "id": 33,
     "titulo": "Edital 2026-0001 Sig Cypress"
   },
   "proposta": {
-    "titulo": "Exploracao VVT Facco 13062026",
-    "seletor": "propostas-exploracao-vvt-facco-13062026"
+    "id": 959
   },
   "orcamento": {
     "faixas": {
