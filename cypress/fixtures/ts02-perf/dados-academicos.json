@@ -1,8 +1,8 @@
 {
-  "usuario": {
-    "email": "joao.neves@sig.com",
-    "senha": "@Dev12345"
-  },
+    "usuario": {
+        "email": "joao.neves@sig.com",
+        "senha": "@Dev12345"
+    },
     "instituicao": "UFMS/Universidade Federal do Mato Grosso do Sul",
     "nivelAcademico": "Doutorado",
     "lattes": "http://lattes.cnpq.br/0000000000000000",
