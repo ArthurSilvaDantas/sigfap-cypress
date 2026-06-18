@@ -1,6 +1,6 @@
 export {};
 interface CriarContaFixture {
-  email: string;
+  emailCadastrado: string;
   senha: string;
 }
 
@@ -49,7 +49,7 @@ describe("TS-04 — F13a: Apresentação — Descrição e Indicadores de Produ�
       dados = fixture;
     });
     cy.fixture<CriarContaFixture>("ts01-smoke/criar-conta").then((fixture) => {
-      conta = { email: fixture.email, senha: fixture.senha };
+      conta = { email: fixture.emailCadastrado, senha: fixture.senha };
     });
   });
 
