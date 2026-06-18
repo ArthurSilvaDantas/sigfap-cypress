@@ -40,3 +40,31 @@ export const getCurrentDate = ({
   const date = now.toLocaleDateString("pt-BR"); // "08/05/2025"
   return `${date}`;
 };
+
+export const calcularTempoDecorrido = (dataInicio: string): string => {
+    let inicio: Date;
+    if (dataInicio.includes('/')) {
+        const [dia, mes, ano] = dataInicio.split('/');
+        inicio = new Date(Number(ano), Number(mes) - 1, Number(dia));
+    } else {
+        inicio = new Date(dataInicio);
+    }
+    
+    const hoje = new Date();
+    let totalMeses = (hoje.getFullYear() - inicio.getFullYear()) * 12
+                   + (hoje.getMonth() - inicio.getMonth());
+
+    if (hoje.getDate() < inicio.getDate()) {
+        totalMeses--;
+    }
+    const anos = Math.floor(totalMeses / 12);
+    const meses = totalMeses % 12;
+
+    if (anos === 0) {
+        return `${meses} mês(es)`;
+    }
+    if (meses === 0) {
+        return `${anos} ano(s)`;
+    }
+    return `${anos} ano(s) ${meses} mês(es)`;
+};

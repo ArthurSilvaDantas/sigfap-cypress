@@ -1,0 +1,17 @@
+{
+  "usuario": {
+    "email": "joao.neves@sig.com",
+    "senha": "@Dev12345"
+  },
+    "instituicao": "UFMS/Universidade Federal do Mato Grosso do Sul",
+    "nivelAcademico": "Doutorado",
+    "lattes": "http://lattes.cnpq.br/0000000000000000",
+    "grandeArea": "Ciências Exatas e da Terra",
+    "area": "Ciência da Computação",
+    "mensagemErro": "Grande Área é obrigatória",
+    "mensagemErroSalvar": "Erro ao salvar!",
+    "nomeInstituicao": "UFMS Pantanal",
+    "sigla": "UFMSP",
+    "unidadeNome": "Capivara MS",
+    "unidadeSigla": "CMS"
+}

@@ -1,0 +1,21 @@
+{
+    "usuario": {
+        "email": "joao.neves@sig.com",
+        "senha": "@Dev12345"
+    },
+    "PERF007":{
+      "tipoVinculo": "Servidor Público",
+      "inicioServico": "01/03/2015",
+      "cargo": "Analista de Sistemas",
+      "inicioCargo": "01/07/2018" 
+    },
+
+    "PERF014": {
+
+    },
+    "PERF0XX": {
+        "tipoVinculo": "clt",
+        "mensagemErro": "Validation failed"
+    }
+    
+}
