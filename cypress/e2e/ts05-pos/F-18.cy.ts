@@ -3,7 +3,7 @@ import { toCyString } from "../../helpers/kebab.helper";
 let dados: any;
 
 before(() => {
-    cy.fixture("ts05-final/perfil-proposta").then((fixture) => {
+    cy.fixture("ts05-pos/perfil-proposta").then((fixture) => {
         dados = fixture;
     });
 });

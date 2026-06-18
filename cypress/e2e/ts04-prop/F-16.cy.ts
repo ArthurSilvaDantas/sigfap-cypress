@@ -3,18 +3,14 @@ import { toCyString } from "../../helpers/kebab.helper";
 let dados: any;
 
 before(() => {
-    cy.fixture("ts05-final/perfil-proposta").then((fixture) => {
+    cy.fixture("ts04-prop/perfil-proposta").then((fixture) => {
         dados = fixture;
     });
 });
 
-describe("F-15 - Proposta Finalização", () => {
+describe("F-16 — Verificação e Submissão", () => {
 
-    context("Visualização da proposta exibe todas as seções", () => {
-
-
-    it("CT-SIG-PROP-035 — Finalização: Visualização da proposta exibe todas as seções", () => {
-
+  beforeEach(() => {
     cy.typeLogin(dados.usuario.email, dados.usuario.senha);
     cy.get('[data-cy="user-menu"]').should("be.visible");
 
@@ -114,17 +110,28 @@ describe("F-15 - Proposta Finalização", () => {
 
     //cy.get('[data-cy="criadoPor.endereco.numero"]').clear().type(dados.numero);
 
-    cy.get('[data-cy="next-button"]').should('be.enabled').click();
-
-    cy.wait(100);
 
     //2.3 Dados acadêmicos
 
-    //Pode ser pulada, pois os dados são preenchidos automaticamente
+    cy.get('[data-cy="add-areas-de-conhecimento"]').should('be.enabled').click();
+
+    cy.get('[data-cy="search-grande-area-id"]').click();
+
+    cy.get('[data-cy="ciencias-exatas-e-da-terra"]').click();
+
+    cy.get('[data-cy="search-area-id"]').click();
+
+    cy.get('[data-cy="ciencia-da-computacao"]').click();
+
+    cy.get('[data-cy="criadoPor.areaDeConhecimento-confirmar"]').should('be.enabled').click();
+    cy.get('[data-cy="next-button"]').should('be.enabled').click();
+
+    cy.wait(100);
 
     cy.get('[data-cy="next-button"]').should('be.enabled').click();
 
     cy.wait(100);
+
 
     //3 Apresentação
 
@@ -197,25 +204,67 @@ describe("F-15 - Proposta Finalização", () => {
     
     cy.wait(100);
 
+    cy.get('[data-cy="next-button"]').should('be.enabled').click();
 
-      cy.get(':nth-child(3) > :nth-child(4) > .css-1bgm4ll > :nth-child(1) > .css-b7m6ts')  .should('contain.text', dados.nome);
+    cy.wait(100);
 
-      cy.get(':nth-child(3) > :nth-child(4) > .css-1bgm4ll > :nth-child(2)').should('contain.text', dados.usuario.email);
+    //4. Finalização
 
-      cy.get(':nth-child(3) > :nth-child(4) > .css-1bgm4ll > :nth-child(3) > .css-b7m6ts').should('contain.text', dados.duracao);
+    });
 
-      cy.get(':nth-child(3) > :nth-child(3) > .css-b7m6ts').should('contain.text', dados.titulo);
 
-      cy.get(':nth-child(7) > .css-1vgoj7v > .css-mh829k').should('contain.text', dados.resposta);
+  context("Submissão da proposta com sucesso", () => {
 
-      cy.get(':nth-child(7) > :nth-child(2) > .css-1bgm4ll > :nth-child(1) > .css-b7m6ts').should('contain.text', dados.nome);
+    it("CT-SIG-PROP-037 - Submissão da proposta com sucesso", () => {
 
-      cy.get(':nth-child(7) > :nth-child(3) > .css-1bgm4ll > :nth-child(3) > .css-b7m6ts').should('contain.text', dados["search-sexo"]);
+      cy.get('[data-cy="termo-de-aceite-aceito-box"]').click();
 
-      cy.get(':nth-child(2) > .css-1xqq3nr > .css-64g0ok').should('contain.text', dados.tituloAtividade);
-      
+      cy.get('[data-cy="menu-verificar-pendencias"]').click();
+
+      cy.get('.css-1alpf6f').should("be.enabled");
+
+      cy.get('.css-1alpf6f').click();
+
+      cy.get('[data-cy="sim-continuar-button"]').click();
+
+      cy.get('[data-cy="confirmar-button"]').click();
+
+      cy.wait(100);
+
+      cy.get('[data-cy-index="propostas-0"] > .css-7732s4 > .css-13mtqy1 > :nth-child(4) > .css-9h7nwi > .css-f3bdy2 > .css-10ed830').should("contain.text", "Submetida");
+
+    });
+  });
+
+context("Submissão bloqueada com campos obrigatórios pendentes", () => {
+
+    it("CT-SIG-PROP-038 - Submissão bloqueada com campos obrigatórios pendentes", () => {
+            
+      cy.get('[data-cy="caracterizacao"]').click();
+
+      cy.get('[data-cy="informacoes-iniciais"] > .css-jq9ysz').click();
+
+      cy.get('[data-cy="duracao"]').clear();
+
+      cy.get('[data-cy="menu-verificar-pendencias"]').click();
+
+      cy.get('.css-1alpf6f').should("be.disabled");
+
     });
   });
 
 
 });
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
