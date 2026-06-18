@@ -1,0 +1,5 @@
+[
+  { "email": "naoexiste@sig.test", "senha": "@Dev12345", "descricao": "e-mail inexistente" },
+  { "email": "joao.neves@sig.com", "senha": "SenhaErrada1!", "descricao": "senha incorreta" },
+  { "email": "emailinvalido", "senha": "@Dev12345", "descricao": "e-mail sem @ (formato inválido)" }
+]
