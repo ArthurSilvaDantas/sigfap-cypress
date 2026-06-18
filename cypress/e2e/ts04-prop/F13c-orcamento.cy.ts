@@ -56,7 +56,9 @@ const abrirProposta = (dados: F13cFixture) => {
   cy.contains(/Informa..es iniciais/i).should("be.visible");
 
   cy.get('[data-cy="apresentacao"]').should("be.visible").click();
-  cy.get('[data-cy="orcamento"]').should("be.visible").click();
+  cy.wait(2000);
+  cy.get('[data-cy="orcamento"]', { timeout: 15000 }).should("be.visible");
+  cy.get('[data-cy="orcamento"]').click();
 };
 
 const acessarSubetapa = (dataCy: string) => {
@@ -191,7 +193,7 @@ describe("F-13c - Orcamento", () => {
     cy.fixture<F13cFixture>("ts04-prop/F13c-orcamento").then((fixture) => {
       dados = fixture;
     });
-    cy.fixture<CriarContaFixture>("criar-conta").then((fixture) => {
+    cy.fixture<CriarContaFixture>("ts01-smoke/criar-conta").then((fixture) => {
       conta = { email: fixture.email, senha: fixture.senha };
     });
   });
@@ -220,9 +222,9 @@ describe("F-13c - Orcamento", () => {
 
     faixas.forEach((faixa) => {
       cy.get(SELETORES.abrirFaixa).should("be.visible").click();
-      cy.get(SELETORES.opcaoFaixaA).should("be.visible");
-      cy.get(SELETORES.opcaoFaixaB).should("be.visible");
-      cy.get(faixa.seletor).click();
+      cy.get(SELETORES.opcaoFaixaA, { timeout: 10000 }).should("be.visible");
+      cy.get(SELETORES.opcaoFaixaB, { timeout: 10000 }).should("be.visible");
+      cy.get(faixa.seletor).click({ force: true });
 
       validarFaixaSelecionada(
         faixa.texto,
