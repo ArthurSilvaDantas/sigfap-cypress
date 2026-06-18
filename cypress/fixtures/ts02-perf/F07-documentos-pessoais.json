@@ -1,0 +1,24 @@
+{
+    "usuario": {
+        "email": "joao.neves@sig.com",
+        "senha": "@Dev12345"
+    },
+    "PERF008": {
+        "tipoDocumento": "Identidade",
+        "nomeArquivo": "documento-de-identificacao-com-foto-2.pdf",
+        "mensagemSucesso": "Arquivo documento-de-identificacao-com-foto-2.pdf enviado com sucesso!"
+
+    },
+    "PERF009": {
+        "tipoDocumento": "RG",
+        "mensagemErro": "O anexo deve ser PDF",
+        "arquivosInvalidos": [
+        { "nome": "arquivo-invalido.exe", "mimeType": "application/octet-stream" },
+        { "nome": "arquivo-invalido.txt", "mimeType": "text/plain" },
+        { "nome": "arquivo-invalido.zip", "mimeType": "application/zip" }
+        ]
+    },
+    "PERFXX": {
+    "mensagemErroQuantidade": "Erro durante o upload: Quantidade máxima de arquivos para a categoria atingida."
+    }
+}
