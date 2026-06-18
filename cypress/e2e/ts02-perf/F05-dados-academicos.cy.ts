@@ -3,14 +3,14 @@ import { toCyString } from "../../helpers/kebab.helper";
 describe("F-05 - Perfil: Dados Acadêmicos", () => {
     // Pré-condições:
     beforeEach(() => {
-        cy.fixture("ts02-perf/F05-dados-academicos").then((dados) => {
+        cy.fixture("ts02-perf/dados-academicos").then((dados) => {
             cy.typeLogin(dados.usuario.email, dados.usuario.senha);
         });
     });
 
-    context("CT-SIG-PERF-006 - Dados Acadêmicos: preenchimento válido", () => {
+    context("CT-SIG-PERF-006 — Dados Acadêmicos: preenchimento válido", () => {
         it("deve salvar dados acadêmicos com Grande Área obrigatória preenchida", () => {
-            cy.fixture("ts02-perf/F05-dados-academicos").then((dados) => {
+            cy.fixture("ts02-perf/dados-academicos").then((dados) => {
                 
                 // Passo 1: navegar para o perfil -> Dados academicos                    
                 cy.get('[data-cy="user-menu"]').click();                    
@@ -61,7 +61,7 @@ describe("F-05 - Perfil: Dados Acadêmicos", () => {
 
     context("CT-SIG-PERF-010 — Dados Acadêmicos: Grande Área obrigatória bloqueia confirmação", () => {
         it("não deve confirmar Área de Conhecimento sem Grande Área selecionada", () => {
-            cy.fixture("ts02-perf/F05-dados-academicos").then((dados) => {
+            cy.fixture("ts02-perf/dados-academicos").then((dados) => {
 
                 // Passo 1: navegar para Dados Acadêmicos
                 cy.get('[data-cy="user-menu"]').click();
@@ -97,10 +97,10 @@ describe("F-05 - Perfil: Dados Acadêmicos", () => {
         });
     });
 
-    context("CT-SIG-PERF-013 - Dados AcadÊmicos: toggle Sugerir Instituição", () => {
+    context("CT-SIG-PERF-013 — Dados Acadêmicos: toggle Sugerir Instituição", () => {
         it("deve ocultar o select e exibir campos livres ao marcar Sugerir Instituição", () => {
         
-            cy.fixture("ts02-perf/F05-dados-academicos").then((dados) => {
+            cy.fixture("ts02-perf/dados-academicos").then((dados) => {
 
             // Passo 1: navegar para Dados Acadêmicos
             cy.get('[data-cy="user-menu"]').click();
@@ -137,7 +137,13 @@ describe("F-05 - Perfil: Dados Acadêmicos", () => {
             // Passo 5: clicar em Salvar
             cy.get('[data-cy="menu-salvar"]').click();
 
-            });       
+            // Passo 6: finalizar edição do perfil
+            cy.get('[data-cy="menu-finalizar"]').click();
+
+            // Resultado esperado: dados salvos com sucesso — campos preenchidos são mantidos
+            cy.get('[data-cy="user-menu"]').should("be.visible");
+
+            });
 
         });
     });

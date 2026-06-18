@@ -10,9 +10,6 @@
       "inicioCargo": "01/07/2018" 
     },
 
-    "PERF014": {
-
-    },
     "PERF0XX": {
         "tipoVinculo": "clt",
         "mensagemErro": "Validation failed"

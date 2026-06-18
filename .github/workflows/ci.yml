@@ -22,3 +22,6 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           install: false
+        env:
+          CYPRESS_SIGFAP_EMAIL: ${{ secrets.CYPRESS_SIGFAP_EMAIL }}
+          CYPRESS_SIGFAP_SENHA: ${{ secrets.CYPRESS_SIGFAP_SENHA }}

@@ -1,0 +1,6 @@
+[
+  { "cpf": "111.111.111-11", "descricao": "dígitos todos iguais" },
+  { "cpf": "000.000.000-00", "descricao": "CPF zerado" },
+  { "cpf": "123.456.789-00", "descricao": "dígito verificador inválido" },
+  { "cpf": "999.999.999-99", "descricao": "dígitos todos iguais (9)" }
+]

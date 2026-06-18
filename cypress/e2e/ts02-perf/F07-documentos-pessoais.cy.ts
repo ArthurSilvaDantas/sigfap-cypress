@@ -1,10 +1,10 @@
 import { toCyString } from "../../helpers/kebab.helper";
 
-describe("F-07 — Perfil: Documentos Pessoais", () => {
+describe("F-07 - Perfil: Documentos Pessoais", () => {
     
     // Pré-condições:
     beforeEach(() => {
-        cy.fixture("ts02-perf/F07-documentos-pessoais").then((dados) => {
+        cy.fixture("ts02-perf/documentos-pessoais").then((dados) => {
             // efetuado o login do usuario
             cy.typeLogin(dados.usuario.email, dados.usuario.senha);
 
@@ -28,7 +28,7 @@ describe("F-07 — Perfil: Documentos Pessoais", () => {
     // CAMINHO FELIZ 
     context("CT-SIG-PERF-008 — Documentos Pessoais: upload de arquivo válido", () => {
         it("deve aceitar upload de PDF válido e listar o documento associado ao tipo selecionado", () => {
-            cy.fixture("ts02-perf/F07-documentos-pessoais").then((dados) => {
+            cy.fixture("ts02-perf/documentos-pessoais").then((dados) => {
 
                 // Passo 1: Navegar para Documentos Pessoais
                 cy.get('[data-cy="user-menu"]').click();
@@ -64,7 +64,7 @@ describe("F-07 — Perfil: Documentos Pessoais", () => {
     //CAMINHO INVÁLIDO
     context("CT-SIG-PERF-009 — Documentos Pessoais: upload de tipo de arquivo inválido", () => {
         it("deve rejeitar arquivos com formato não suportado", () => {
-            cy.fixture("ts02-perf/F07-documentos-pessoais").then((dados) => {
+            cy.fixture("ts02-perf/documentos-pessoais").then((dados) => {
                 
                 // Passo 1: navegar para Documentos Pessoais
                 cy.get('[data-cy="user-menu"]').click();
@@ -101,7 +101,7 @@ describe("F-07 — Perfil: Documentos Pessoais", () => {
 
     context("CT-SIG-PERF-016 — Documentos Pessoais: upload de mais de um arquivo", () => {
         it("deve rejeitar segundo arquivo e informar quantidade máxima atingida", () => {
-            cy.fixture("ts02-perf/F07-documentos-pessoais").then((dados) => {
+            cy.fixture("ts02-perf/documentos-pessoais").then((dados) => {
 
                 // Passo 1: selecionar tipo de documento
                 cy.get('[data-cy="select-categories-usuario-anexo"]').click();
