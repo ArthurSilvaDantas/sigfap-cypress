@@ -1,9 +1,9 @@
 {
-  "nome": "João Neves Teste",
-  "dataNascimento": "15/04/1987",
-  "sexo": "Masculino",
-  "email": "joao.neves@sig.com",
-  "cpf": "30696436043",
-  "senha": "@Dev12345",
-  "senhaConfirmar": "@Dev12345"
+    "nome": "João Neves Teste",
+    "dataNascimento": "15/04/1987",
+    "sexo": "Masculino",
+    "cpf": "30696436043",
+    "senha": "@Dev12345",
+    "senhaConfirmar": "@Dev12345",
+    "emailCadastrado": "joao.neves@sig.com"
 }

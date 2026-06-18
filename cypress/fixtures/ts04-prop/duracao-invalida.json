@@ -1,0 +1,5 @@
+[
+  { "valor": "0",   "descricao": "zero meses (abaixo do mínimo)" },
+  { "valor": "-1",  "descricao": "valor negativo" },
+  { "valor": "abc", "descricao": "texto não numérico" }
+]

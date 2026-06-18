@@ -1,0 +1,30 @@
+{
+  "edital": {
+    "id": 33,
+    "titulo": "Edital 2026-0001 Sig Cypress"
+  },
+  "proposta": {
+    "id": 959,
+    "titulo": "Projeto de Teste VVT 2026",
+    "coordenador": "João Neves Teste"
+  },
+  "descricao": {
+    "respostaValida": "Descricao ok",
+    "limiteMaximo": {
+      "chars": 21,
+      "texto": "AAAAAAAAAAAAAAAAAAAAA"
+    }
+  },
+  "indicadores": {
+    "linha": "Artigo completo publicado",
+    "quantidadeNacional": 2,
+    "quantidadeInternacional": 1
+  },
+  "atividade": {
+    "titulo": "Levantamento de requisitos",
+    "mesInicio": "1",
+    "duracaoLabel": "3 meses",
+    "duracaoColuna": "3",
+    "cargaHorariaSemanal": "4-horas"
+  }
+}

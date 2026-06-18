@@ -1,0 +1,11 @@
+{
+    "usuario": {
+        "email": "joao.neves@sig.com",
+        "senha": "@Dev12345"
+    },
+    "propostaNovaUrl": "/edital/12/proposta/adicionar",
+    "propostaExistenteUrl": "/edital/12/minhas-propostas/359",
+    "titulo": "Projeto Teste VVT 2026",
+    "duracao": "12",
+    "instituicao": "UFMS"
+}
