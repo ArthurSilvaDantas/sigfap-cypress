@@ -30,3 +30,17 @@ Cypress.Commands.add("typeLogin", (username, password) => {
   cy.get('[data-cy="senha"]').type(password);
   cy.get('[data-cy="loginButton"]').click(); //Botão Acessar da página principal
 });
+
+Cypress.Commands.add("getByLabel", (label) => {
+  return cy
+    .contains("label", label, { matchCase: false })
+    .should("be.visible")
+    .invoke("attr", "for")
+    .then((fieldId) => {
+      expect(fieldId, `campo associado ao rotulo "${label}"`)
+        .to.be.a("string")
+        .and.not.be.empty;
+
+      return cy.get(`[id="${fieldId}"]`);
+    });
+});

@@ -1,0 +1,13 @@
+{
+    "usuario": {
+        "email": "joao.neves@sig.com",
+        "senha": "@Dev12345"
+    },
+    "nome": "Ana Beatriz Silva",
+    "dataNascimento": "15/06/1995",
+    "sexo": "Feminino",
+    "pais": "Brasil",
+    "paisAlternativo": "Argentina",
+    "racaCor": "Branco(a)",
+    "dataNascimentoFutura": "31/12/2099"
+}

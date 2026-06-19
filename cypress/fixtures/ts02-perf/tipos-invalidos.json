@@ -1,0 +1,5 @@
+[
+  { "fileName": "documento.exe", "mimeType": "application/octet-stream", "descricao": "arquivo executável (.exe)" },
+  { "fileName": "documento.txt", "mimeType": "text/plain",                "descricao": "arquivo de texto simples (.txt)" },
+  { "fileName": "documento.zip", "mimeType": "application/zip",           "descricao": "arquivo compactado (.zip)" }
+]
